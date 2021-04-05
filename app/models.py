@@ -1,4 +1,4 @@
-from . import db
+from app import db
 from werkzeug.security import generate_password_hash
 
 class UserProfile(db.Model):
@@ -12,12 +12,15 @@ class UserProfile(db.Model):
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
     username = db.Column(db.String(80), unique=True)
+    email= db.Column(db.String(80))
     password = db.Column(db.String(255))
+   
 
-    def __init__(self, first_name, last_name, username, password):
+    def __init__(self, first_name, last_name, username,email, password):
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
+        self.email=email
         self.password = generate_password_hash(password, method='pbkdf2:sha256')
     def is_authenticated(self):
         return True
@@ -36,3 +39,36 @@ class UserProfile(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+
+class AddItem(db.Model): 
+    __tablename__ = 'items'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80))
+    description = db.Column(db.String(100))
+    
+    quantity= db.Column(db.Integer())
+    price = db.Column(db.Integer())
+   
+    
+
+    def __init__(self,title,description,quantity,price):
+        
+        self.title= title
+        self.description =description
+        
+        self.quantity= quantity 
+        self.price = price 
+        
+        
+    def get_id(self):
+        try:
+            return unicode(self.id)  # python 2 support
+        except NameError:
+            return str(self.id)  # python 3 support
+
+    def __repr__(self):
+        return '<Item "{}">'.format(self.id)
+
+
+db.create_all()

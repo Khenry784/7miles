@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+<div class="container">
+    <div class="row">
+        {%for items in items  %}
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <img src="{{url_for('static', filename='uploads/')}}" alt="{{items.title}}"class="card-img-top"height="200" >
+                <div class="card-body">
+                    <h5 class="text-center">{{items.title}}</h5>
+                    <p class="text-center">Price ${{items.price}}</p>
+                </div>
+                
+                <div class="card-footer">
+                    <div>
+                        <a href="{{url_for('single_page',id=items.id)}}" class="float-left btn btn-sm btn-primary">Details</a>
+                    </div>
+                
+                <form action="{{url_for('cart')}}" method="POST">
+                    <input type="hidden" name="product_id" value="{{items.id}}">
+                    <button type="submit" class="btn btn-sm btn-warning">Add to Cart</button>
+                    <label for="">Quantity</label>
+                    <input class = "form-control  rounded border" type="number" name="quantity" id="" value="1" min="1" max="">
+                </form>
+                
+            </div>
+
+            </div>
+            
+        </div>
+        {%endfor%}
+    </div>
+</div>
+{% endblock %}

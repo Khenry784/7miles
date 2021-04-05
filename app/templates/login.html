@@ -2,6 +2,9 @@
 
 {% block main %}
   <div class="login-form center-block">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
     <h2>Please Log in</h2>
     {% include 'flash_messages.html' %}
     <form action="{{ url_for('login') }}" method="post">
@@ -14,7 +17,21 @@
         {{ form.password.label }}
         {{ form.password(class='form-control') }}
       </div>
-      <button type="submit" name="submit" class="btn btn-primary btn-block">Log in</button>
+      <div class="d-flex justify-content-center"> 
+      <button type="submit" name="submit" class="btn btn-info">Log in</button>
+      </div>
+
+      <div class="text-center p-t-115 mt-4">
+        <span class="txt1">
+            Don't have an account?
+        </span>
+    
+        <a href=" {{url_for('register')}}">Register Now</a>
+    </div>
     </form>
+  </div>
+      
+</div>
+    <hr>
   </div>
 {% endblock %}

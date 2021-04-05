@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+{% include 'flash_messages.html' %}
+    <div class="d-flex flex-column justify-content-center m-5 shadow-lg">
+        <form action method="POST" >
+                    {{form.csrf_token}}
+                    <div class="upper-container">
+                        <h2 class="text-center m-2"> Welcome to Seven Miles Hardware Store </h2>
+                        
+                        <div class="image-container d-flex justify-content-center">
+                            <img id="icon" src="{{url_for('static', filename ='uploads/7mileslogo.png')}}"alt="logo" height= 100px width= 100px/>
+                
+                        </div>
+                        
+                        <div class="txt-container d-flex justify-content-center">
+                            <p>
+                            
+                                It's quick and easy! Enter your info to get an account!
+                            </p>
+
+                        </div>
+                        
+                    </div>
+                    
+                        <div class=" lower-container">
+                            <div class= "txt-bx">
+
+                                {{form.f_name.label}}
+                                {{form.f_name(class = "form-control  mb-2 rounded border", placeholder = "JohnDoe")}}
+                            
+                            </div>
+                            <div class= "txt-bx">
+
+                                {{form.l_name.label}}
+                                {{form.l_name(class = "form-control  mb-2 rounded border", placeholder = "JohnDoe")}}
+                            
+                            </div>
+                            <div class= "txt-bx">
+
+                                {{form.username.label}}
+                                {{form.username(class = "form-control  mb-2 rounded border", placeholder = "JohnDoe")}}
+                            
+                            </div>
+                            <div class= "txt-bx">
+                                {{form.email.label}}
+                                {{form.email (class = "form-control  mb-2 rounded border",placeholder="JohnDoe@example.com")}}
+                            </div>
+                            
+
+                            
+            
+                            <div class= "txt-bx" >
+                                {{form.password.label}}
+                                {{form.password(class = "form-control mb-2 rounded border ")}}
+                            </div>
+                            <div class= "txt-bx">
+                                {{form.confirm.label}}
+                                {{form.confirm(class = "form-control  mb-2 rounded border")}}
+                            </div>
+                            
+                            
+                        
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="signup-btn"> Sign Up</button>
+                        </div>
+                        <div class="text-center p-t-115 mt-4">
+                            <span class="txt1">
+                                Already have an account?
+                            </span>
+                        
+                            <a href=" {{url_for('login')}}">Login</a>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            
+        
+        
+
+    </div>
+
+
+
+
+
+{% endblock %}

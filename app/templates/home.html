@@ -1,7 +1,56 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h1 class="page-header">Lab 5 Starter Code</h1>
-<p class="lead">Use this starter template for Lab 5<br/>
-All you get are these files and mostly barebones HTML/CSS files.</p>
+
+    <!--   
+	welcome message for the website 
+	-->
+	
+	<nav id="navbar">
+		<div class="container">
+		<center>
+			<h1>
+					WELCOME TO 7 MILES HARDWARE STORE!
+
+			</h1>
+		</center>
+		</div>
+	</nav>
+    <section>
+		<center>
+			<img src="{{url_for('static', filename ='uploads/7mileslogo.png')}}"alt="logo" height= 500 width= 500>
+		</center>
+	</section>
+    <!--   
+	button which links to catalog webpage
+	-->
+	
+   <section>
+    <center>
+        <a href="{{url_for('catalog')}}"><button class="button">SEE ALL HARDWARE APPLIANCES</button></a>
+    </center>
+</section>
+
+<!--   
+Featured hardware appliances with image, can be linked to another webpage
+-->
+
+        {%for items in items  %}
+        <div class="col-md-3 mt-3">
+            <div class="card">
+                <img src="{{url_for('static', filename='uploads/')}}" alt="{{items.title}}"class="card-img-top"height="150">
+                <div class="card-body">
+                    <h5 class="text-center">{{items.title}}</h5>
+                    <p class="text-center">{{items.description}} </p>
+                    <h5 class="text-left btn btn-info">{{items.price}}</h5>
+                    
+                </div>
+                
+
+            </div>
+            
+        </div>
+        {%endfor%}
+    </div>
+</div>
 {% endblock %}

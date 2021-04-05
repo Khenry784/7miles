@@ -1,32 +1,71 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <a class="navbar-brand" href="#">Lab 5</a>
+<!--nav bar-->
+<nav class="navbar">
+<nav class="navbar  navbar-expand-lg navbar-dark bg-primary fixed-top ">
+  <a class="navbar-brand" href="{{ url_for('home') }}"> <img src="{{url_for('static', filename ='uploads/7mileslogo.png')}}"alt="logo" height= 75px width= 75px> </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ url_for('home') }}"><img  src="{{url_for('static', filename ='uploads/homelogo.png')}}"  alt="logo" height=50px width=50px> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+        <a class="nav-link" href="{{ url_for('manageItem') }}"><img src="{{url_for('static', filename ='uploads/doublehammerlogo.png')}}" alt="logo" height=50px width=50px></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('secure_page') }}">Secure Page</a>
+        <a class="nav-link" href="{{ url_for('about') }}"><img src="{{url_for('static', filename ='uploads/searchlogo.png')}}" alt="logo" height=50px width=50px> </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('cart') }}"><img src="{{url_for('static', filename ='uploads/shoppinglogo.png')}}" alt="logo" height=50px width=50px></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('getCart') }}" tabindex="-1">Cart ({{session['ShoppingCart']|length }})</a>
+      </li>
+      <!--  
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Manage
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ url_for('manageItem') }}">Manage Item</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      
     </ul>
-
-    <ul class="navbar-nav">
-      {% if current_user.is_authenticated %}
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-          </li>
-      {% else %}
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
-      {% endif %}
-    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    -->
   </div>
+  
+  <ul class="navbar-nav">
+    {%if current_user.is_authenticated%}
+              <!-- Logout    -->
+     <li class="nav-item ">
+       <a href="{{url_for('logout')}}" class="nav-link logout"> <span
+       class="d-none d-sm-inline">Logout </span><i class="fa fa-sign-out"><img class="icon" src="uploads/logout.png"></i></a>
+     </li>
+     {% else %}
+     <li class="nav-item">
+     <a href="{{url_for('login')}}" class="nav-link login"> <img src="{{url_for('static', filename ='uploads/loginlogo.png')}}" alt="logo" height=30px width=30px></a>
+       
+     </li>
+     {%endif%}    
+    
+   </ul>
+
+
 </nav>
+<!--nav bar end-->
+
+
+  
+    
+
+    

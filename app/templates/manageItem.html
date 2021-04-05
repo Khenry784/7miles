@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h1 class="page-header">Admins Only</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+ 
+            <div class="jumbotron p-3">
+ 
+                <h2>Manage <b>Items </b>  <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">Add New Item</button> </h2>
+ 
+ 
+                {% with messages = get_flashed_messages() %}
+ 
+                {% if messages %}
+ 
+                {% for message in messages %}
+ 
+                <div class="alert alert-success alert-dismissable" role="alert">
+ 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+ 
+                        <span aria-hidden="true">x</span>
+ 
+                    </button>
+ 
+ 
+                {{message}}
+ 
+ 
+                </div>
+ 
+ 
+                {% endfor %}
+ 
+                {% endif %}
+                {% endwith %}
+ 
+ 
+                <table class="table table-hover table-dark">
+ 
+                    <tr>
+ 
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        
+                        <th>Quantity</th>
+                        
+ 
+                    </tr>
+ 
+ 
+                   {% for row in items %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.title}}</td>
+                        <td>{{row.description}}</td>
+                        <td>{{row.price}}</td>
+                        
+                        <td>{{row.quantity}}</td>
+                        
+ 
+                        <td>
+                            <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+ 
+ 
+                        </td>
+ 
+                    </tr>
+ 
+ 
+                  <!-- Modal Edit Items-->
+<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+ 
+ 
+      <div class="modal-content">
+ 
+ 
+         <div class="modal-header">
+ 
+ 
+            <h4 class="modal-title">Update Information</h4>
+ 
+ 
+         </div>
+ 
+ 
+         <div class="modal-body">
+ 
+ 
+            <form action="{{url_for('update')}}" method="POST">
+ 
+ 
+               <div class="form-group">
+ 
+ 
+                  <label>Title:</label>
+                   <input type="hidden"  name="id" value="{{row.id}}">
+ 
+                  <input type="text" class="form-control" name="title" value="{{row.title}}">
+ 
+ 
+               </div>
+ 
+ 
+ 
+               <div class="form-group">
+ 
+ 
+                  <label>Description:</label>
+ 
+                  <input type="text" class="form-control" name="description" value="{{row.description}}">
+ 
+ 
+               </div>
+ 
+ 
+               <div class="form-group">
+ 
+ 
+                  <label>Price:</label>
+ 
+                  <input type="number" class="form-control" name="price" value="{{row.price}}">
+ 
+ 
+               </div>
+
+              
+
+               <div class="form-group">
+ 
+ 
+                  <label>Quantity:</label>
+ 
+                  <input type="number" class="form-control" name="quantity" value="{{row.quantity}}">
+ 
+ 
+               </div>
+
+              
+ 
+ 
+               <div class="form-group">
+ 
+ 
+                  <button class="btn btn-primary" type="submit">Update</button>
+ 
+ 
+               </div>
+ 
+ 
+            </form>
+ 
+ 
+         </div>
+ 
+ 
+         <div class="modal-footer">
+ 
+ 
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+ 
+ 
+         </div>
+ 
+ 
+      </div>
+ 
+ 
+   </div>
+ 
+</div>
+ 
+ 
+                    {% endfor %}
+ 
+ 
+                </table>
+ 
+ 
+            </div>
+ 
+ 
+ 
+                  <!-- Modal Add Item-->
+ 
+ 
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+ 
+            <h4 class="modal-title">Add Item</h4>
+         </div>
+         <div class="modal-body">
+ 
+         <form method="POST" enctype="multipart/form-data" action="{{ url_for('manageItem') }}">
+            
+            {{form.csrf_token}}
+ 
+               <div class="upload-container">
+    {{form.title.label}}
+    {{form.title (class = "form-control  mb-2 rounded border" )}}
+    
+  </div>
+
+  <div class="upload-container">
+    {{form.description.label}}
+    {{form.description (class = "form-control")}}
+    
+  </div>
+
+  <div class="upload-container">
+    {{form.price.label}} 
+    {{form.price (class = "form-control  mb-2 rounded border", type= "number" )}}
+  </div>
+
+
+  <div class="upload-container">
+   {{form.quantity.label}}
+   {{form.quantity (class = "form-control")}}
+   
+ </div>
+
+  
+  
+
+              
+ 
+ 
+               <div class="form-group">
+ 
+ 
+                  <button class="btn btn-primary" type="submit">Add Item</button>
+ 
+ 
+               </div>
+ 
+ 
+         </form>
+ 
+ 
+         </div>
+ 
+ 
+         <div class="modal-footer">
+ 
+ 
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+ 
+ 
+         </div>
+ 
+ 
+      </div>
+ 
+ 
+   </div>
+ 
+ 
+</div>
+ 
+ 
+ 
+ 
+ 
+        </div>
+ 
+    </div>
+ 
+ 
+</div>
+{% endblock %}
